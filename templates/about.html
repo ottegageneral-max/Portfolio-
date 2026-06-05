@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}About - {{ portfolio.name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>About Me</h1>
+        <p>Getting to know the developer</p>
+    </div>
+</div>
+
+<section class="about-section">
+    <div class="container">
+        <div class="about-content">
+            <h2>Who Am I?</h2>
+            <p>I'm {{ portfolio.name }}, a Python developer passionate about building web applications. I love solving problems with clean, readable code and creating applications that are both functional and user-friendly.</p>
+            
+            <p>I'm learning web development and exploring the possibilities of building scalable applications. My journey in programming started with curiosity about how things work, and it's evolved into a passion for creating useful software. Every project I build is a learning opportunity.</p>
+            
+            <p>I believe in writing code that's easy to understand and maintain. I take pride in my work and I'm committed to continuous learning and improvement.</p>
+
+            <h2 style="margin-top: 40px;">Skills & Technologies</h2>
+            <div class="skills-grid">
+                {% for skill in skills %}
+                <div class="skill-card">{{ skill }}</div>
+                {% endfor %}
+            </div>
+
+            <h2 style="margin-top: 40px;">Why I Do This</h2>
+            <p>I'm passionate about creating software that solves real problems. Every line of code I write is intentional and purposeful. I'm available for freelance projects and collaborations. If you have an interesting project or just want to chat about web development, feel free to reach out!</p>
+
+            <p style="margin-top: 20px;"><strong>Open to:</strong> Freelance projects • Contract work • Collaborations • Learning opportunities</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
