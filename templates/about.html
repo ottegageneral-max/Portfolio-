@@ -1,37 +1,94 @@
 {% extends "base.html" %}
 
 {% block title %}About - {{ portfolio.name }}{% endblock %}
+{% block meta_description %}About {{ portfolio.name }}. A full-stack developer passionate about building modern web applications and solving complex problems.{% endblock %}
 
 {% block content %}
-<div class="page-header">
+<!-- Page Header -->
+<section style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.15) 0%, rgba(0, 212, 255, 0.15) 100%); padding: 4rem 2rem; text-align: center; margin-bottom: 3rem;">
     <div class="container">
-        <h1>About Me</h1>
-        <p>Getting to know the developer</p>
+        <h1 style="font-size: 3rem; margin-bottom: 1rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">About Me</h1>
+        <p style="font-size: 1.2rem; color: var(--text-muted);">Getting to know the developer behind the code</p>
     </div>
-</div>
+</section>
 
-<section class="about-section">
-    <div class="container">
-        <div class="about-content">
-            <h2>Who Am I?</h2>
-            <p>I'm {{ portfolio.name }}, a Python developer passionate about building web applications. I love solving problems with clean, readable code and creating applications that are both functional and user-friendly.</p>
-            
-            <p>I'm learning web development and exploring the possibilities of building scalable applications. My journey in programming started with curiosity about how things work, and it's evolved into a passion for creating useful software. Every project I build is a learning opportunity.</p>
-            
-            <p>I believe in writing code that's easy to understand and maintain. I take pride in my work and I'm committed to continuous learning and improvement.</p>
+<!-- About Content -->
+<section style="padding: 3rem 2rem;">
+    <div style="max-width: 900px; margin: 0 auto;">
+        <!-- Who Am I -->
+        <div style="margin-bottom: 4rem;">
+            <h2 style="font-size: 2.2rem; color: var(--secondary-color); margin-bottom: 1.5rem;">Who Am I?</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.8; font-size: 1.05rem;">
+                I'm {{ portfolio.name }}, a full-stack developer passionate about building web applications that solve real problems. With expertise in Python, Flask, and modern JavaScript, I create scalable, performant solutions that drive business value.
+            </p>
+            <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.8; font-size: 1.05rem;">
+                My approach to development is rooted in clean code principles, attention to detail, and a deep understanding of user needs. I believe great software combines elegant design with rock-solid functionality.
+            </p>
+            <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.8; font-size: 1.05rem;">
+                From concept to deployment, I handle all aspects of the development lifecycle. Whether it's architecting scalable backends or crafting responsive frontends, I'm committed to delivering excellence.
+            </p>
+        </div>
 
-            <h2 style="margin-top: 40px;">Skills & Technologies</h2>
+        <!-- Skills Section -->
+        <div style="margin-bottom: 4rem;">
+            <h2 style="font-size: 2.2rem; color: var(--secondary-color); margin-bottom: 2rem;">Skills & Proficiency</h2>
             <div class="skills-grid">
                 {% for skill in skills %}
-                <div class="skill-card">{{ skill }}</div>
+                <div class="skill-item">
+                    <h3>{{ skill.name }}</h3>
+                    <div class="skill-level">
+                        <div class="skill-bar" style="width: {{ skill.level }}%; animation-delay: 0.1s;"></div>
+                    </div>
+                    <p style="color: var(--primary-color); font-weight: 600; margin-top: 0.5rem; font-size: 0.9rem;">{{ skill.level }}%</p>
+                </div>
                 {% endfor %}
             </div>
-
-            <h2 style="margin-top: 40px;">Why I Do This</h2>
-            <p>I'm passionate about creating software that solves real problems. Every line of code I write is intentional and purposeful. I'm available for freelance projects and collaborations. If you have an interesting project or just want to chat about web development, feel free to reach out!</p>
-
-            <p style="margin-top: 20px;"><strong>Open to:</strong> Freelance projects • Contract work • Collaborations • Learning opportunities</p>
         </div>
+
+        <!-- Testimonials -->
+        <div style="margin-bottom: 4rem;">
+            <h2 style="font-size: 2.2rem; color: var(--secondary-color); margin-bottom: 2rem;">Client Feedback</h2>
+            <div class="testimonials-grid">
+                {% for testimonial in testimonials %}
+                <div class="testimonial-card">
+                    <p class="testimonial-text">{{ testimonial.text }}</p>
+                    <div>
+                        <p class="testimonial-author">{{ testimonial.author }}</p>
+                        <p class="testimonial-role">{{ testimonial.role }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Why I Do This -->
+        <div style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 212, 255, 0.1) 100%); padding: 2.5rem; border-radius: 10px; border: 1px solid var(--border-color);">
+            <h2 style="font-size: 2.2rem; color: var(--secondary-color); margin-bottom: 1.5rem;">Why I Do This</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.8; font-size: 1.05rem;">
+                I'm passionate about creating software that solves real problems and makes a difference. Every line of code I write is intentional, purposeful, and built to last.
+            </p>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.05rem;">
+                I'm available for freelance projects, contract work, and collaborations with teams that value quality and innovation.
+            </p>
+            <div style="margin-top: 2rem;">
+                <p style="color: var(--text-muted); font-weight: 600;">Currently Open To:</p>
+                <ul style="color: var(--text-muted); margin-top: 1rem; padding-left: 1.5rem;">
+                    <li style="margin-bottom: 0.5rem;">✓ Freelance Projects & Contract Work</li>
+                    <li style="margin-bottom: 0.5rem;">✓ Team Collaborations</li>
+                    <li style="margin-bottom: 0.5rem;">✓ Consulting & Code Reviews</li>
+                    <li>✓ Continuous Learning & Mentorship</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" style="margin: 5rem 2rem;">
+    <div class="container">
+        <h2>Let's Connect</h2>
+        <p>Interested in working together? I'd love to hear about your project.</p>
+        <a href="/contact" class="btn btn-primary">Send Me a Message</a>
     </div>
 </section>
 {% endblock %}
