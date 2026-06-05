@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block meta_description %}{{ portfolio.name }} - {{ portfolio.title }}. Full Stack Developer specializing in Python, Flask, and JavaScript.{% endblock %}">
+    <meta name="keywords" content="Python, Flask, JavaScript, Web Development, Full Stack Developer">
+    <meta name="theme-color" content="#0066cc">
+    <meta name="author" content="{{ portfolio.name }}">
     <title>{% block title %}{{ portfolio.name }} - {{ portfolio.title }}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <nav class="navbar">
+    <!-- Navigation -->
+    <nav>
         <div class="container">
-            <div class="nav-brand">
-                <a href="/">{{ portfolio.name }}</a>
-            </div>
-            <ul class="nav-menu">
+            <div class="logo">{{ portfolio.name }}</div>
+            <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/projects">Projects</a></li>
                 <li><a href="/about">About</a></li>
@@ -21,14 +24,29 @@
         </div>
     </nav>
 
+    <!-- Main Content -->
     <main>
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="footer">
-        <div class="container">
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="{{ portfolio.github }}" target="_blank" rel="noopener noreferrer" title="GitHub">
+                    GH
+                </a>
+                {% if portfolio.linkedin %}
+                <a href="{{ portfolio.linkedin }}" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                    LI
+                </a>
+                {% endif %}
+                <a href="mailto:{{ portfolio.email }}" title="Email">
+                    📧
+                </a>
+            </div>
             <p>&copy; 2024 {{ portfolio.name }}. All rights reserved.</p>
-            <p style="font-size: 0.9em; color: #bbb; margin-top: 10px;">Built with Python & Flask • No AI shortcuts • Real Developer Code</p>
+            <p style="font-size: 0.9em; color: var(--text-muted); margin-top: 10px;">Built with Flask & Python • Real Developer Code</p>
         </div>
     </footer>
 </body>
