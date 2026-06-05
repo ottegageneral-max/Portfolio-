@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import os
 from datetime import datetime
+import pytz
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key-change-this-for-production'
@@ -82,6 +83,16 @@ TESTIMONIALS = [
     },
 ]
 
+# Timezone data for the clock
+TIMEZONES = [
+    {'name': 'New York', 'timezone': 'America/New_York'},
+    {'name': 'London', 'timezone': 'Europe/London'},
+    {'name': 'Tokyo', 'timezone': 'Asia/Tokyo'},
+    {'name': 'Sydney', 'timezone': 'Australia/Sydney'},
+    {'name': 'Dubai', 'timezone': 'Asia/Dubai'},
+    {'name': 'Los Angeles', 'timezone': 'America/Los_Angeles'},
+]
+
 @app.route('/')
 def home():
     return render_template('index.html', portfolio=PORTFOLIO_DATA, projects=PROJECTS[:3])
@@ -103,6 +114,10 @@ def contact():
         return jsonify({'success': True, 'message': 'Thanks for reaching out! I will get back to you soon.'})
     return render_template('contact.html', portfolio=PORTFOLIO_DATA)
 
+@app.route('/clock')
+def clock():
+    return render_template('clock.html', timezones=TIMEZONES, portfolio=PORTFOLIO_DATA)
+
 @app.route('/api/projects')
 def api_projects():
     return jsonify(PROJECTS)
@@ -110,6 +125,24 @@ def api_projects():
 @app.route('/api/skills')
 def api_skills():
     return jsonify(SKILLS)
+
+@app.route('/api/time')
+def api_time():
+    """API endpoint to get current time in all timezones"""
+    try:
+        times = {}
+        for tz_info in TIMEZONES:
+            tz = pytz.timezone(tz_info['timezone'])
+            current_time = datetime.now(tz)
+            times[tz_info['name']] = {
+                'timezone': tz_info['timezone'],
+                'time': current_time.strftime('%H:%M:%S'),
+                'date': current_time.strftime('%A, %B %d, %Y'),
+                'utc_offset': current_time.strftime('%z')
+            }
+        return jsonify(times)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
